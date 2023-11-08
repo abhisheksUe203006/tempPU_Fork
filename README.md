@@ -21,7 +21,7 @@ Admin profile can add and remove employees.
 Assistant profile can record attendance for employees.	 Attendance is then visible to admin profile.
 
 #### Complaint registration and status tracking(User)
-User can register complaints with details including address, phone num, details, and photos.
+User can register complaints with details including address, phone num, details, and photos. They can then track the progress of the complaint.
 
 ## Features
 
