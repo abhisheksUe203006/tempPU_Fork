@@ -15,7 +15,7 @@ A full stack app for online registration and resolution of complaints in Panjab 
 The Panjab University Complaint App is a full-stack application built on the MERN (MongoDB, Express.js, React, Node.js) technology stack, designed to enhance the overall experience of students, faculty, and staff at Panjab University by providing an efficient platform for submitting, tracking, and resolving complaints and feedback.
 
 #### Employee Management(Admin/Assistant)
-The assistant profile can add, remove employees and can assign jobs to the employees.
+The assistant profile can add, remove and assign jobs to employees.
 Admin profile can add and remove employees.
 #### Attendance system(Assistant)
 Assistant profile can record attendance for employees.	 Attendance is then visible to the admin profile.
