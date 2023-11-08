@@ -18,7 +18,7 @@ The Panjab University Complaint App is a full-stack application built on the MER
 The assistant profile can add, remove employees and can assign jobs to the employees.
 Admin profile can add and remove employees.
 #### Attendance system(Assistant)
-Assistant profile can record attendance for employees.	 Attendance is then visible to admin profile.
+Assistant profile can record attendance for employees.	 Attendance is then visible to the admin profile.
 
 #### Complaint registration and status tracking(User)
 User can register complaints with details including address, phone num, details, and photos. They can then track the progress of the complaint.
@@ -39,7 +39,6 @@ User can register complaints with details including address, phone num, details,
 - Node.js
 - MongoDB
 - Express.js
-- ## anything else from backend
 
 ## Getting Started
 
