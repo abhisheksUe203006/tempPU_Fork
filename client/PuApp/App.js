@@ -14,6 +14,7 @@ import ComplaintPage from "./src/components/ComplaintPage/ComplaintPage";
 import User from "./src/screens/User/User";
 import UserScreen from "./src/screens/User/UserScreen";
 import ComplaintAssign from "./src/components/ComplaintAssign/ComplaintAssign";
+import EditProfile from "./src/components/Role.js/EditProfile";
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,7 @@ const NavigatorComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen
+        <Stack.Screen
           name="AssistantScreen"
           component={AssistantScreen}
           initialParams={{
@@ -31,7 +32,8 @@ const NavigatorComponent = () => {
             _id: 123,
           }}
           options={{ headerShown: false }}
-        /> */}
+        />
+
         <Stack.Screen
           name="HomePage"
           component={Login}
@@ -85,6 +87,7 @@ export default function App() {
   // return <CreateAccount />;
   // return <DropDownSelector />;
   return <NavigatorComponent />;
+  // return <EditProfile />;
   // return <UserScreen/>
 
   // return <ComplaintPage />;

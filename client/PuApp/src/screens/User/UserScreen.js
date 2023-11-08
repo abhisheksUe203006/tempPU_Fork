@@ -19,8 +19,6 @@ export const userContext = createContext();
 const UserScreen = () => {
   const route = useRoute();
   const { role, name, dept, _id } = route.params;
-  console.log(name, dept, role);
-  const dispVal = role !== "resident" ? "flex" : "none";
   console.log(dispVal);
   return (
     <userContext.Provider
@@ -57,11 +55,11 @@ const UserScreen = () => {
           component={User}
           initialParams={{ screen: "user" }}
         />
+
         <Draw.Screen
-          name="AddEmployee"
+          name="Edit Profile"
           options={{
             headerShown: false,
-            drawerItemStyle: { display: "none" },
             drawerIcon: () => (
               <Feather
                 style={tabStyle.icon}

@@ -19,17 +19,21 @@ const UserSchema = new mongoose.Schema(
       required: true,
       min: 5,
     },
-    role:{
-        type: String,
-        required: true,
+    teamId: {
+      type: Array,
+      default: [],
     },
-    mobile:{
-        type: String,
-        required: true,
+    role: {
+      type: String,
+      required: true,
     },
-    department:{
-        type: String,
-    }
+    mobile: {
+      type: String,
+      required: true,
+    },
+    department: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

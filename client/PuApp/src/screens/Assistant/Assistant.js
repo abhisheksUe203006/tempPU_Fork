@@ -13,10 +13,13 @@ import Header from "../../components/Role.js/Header/Header";
 import Body from "../../components/Role.js/Body/Body";
 import { useContext } from "react";
 import { roleContext } from "./AssistantScreen";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const stack = createStackNavigator();
 
 const Assistant = ({ user }) => {
   const [complaintsList, setComplaintsList] = useState([]);
-  const [tasks, setTasks] = useState(tasksData);
+
   useFocusEffect(
     React.useCallback(() => {
       return () => {
@@ -28,6 +31,7 @@ const Assistant = ({ user }) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
+
       <Body
         complaintsList={complaintsList}
         setComplaintsList={setComplaintsList}

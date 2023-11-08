@@ -13,7 +13,7 @@ const InfoArea = ({ data, st }) => {
   return (
     <View style={[styles.container, st]}>
       <Text style={styles.infoText}>{`Name: ${data.name}`}</Text>
-      <Text style={styles.infoText}>{`Phone No: ${data.phone}`}</Text>
+      <Text style={styles.infoText}>{`Phone No: ${data.mobile}`}</Text>
       <Text style={styles.infoText}>{`Address: ${data.address}`}</Text>
       <Text style={styles.infoText} numberOfLines={2}>
         {`Complaint Details: ${data.details}...`}{" "}

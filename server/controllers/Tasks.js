@@ -6,7 +6,7 @@ import User from "../models/User.js";
 export const register_task = async (req, res) => {
   console.log("Task1");
   try {
-    const { name, phone, address, dept, id, details } = req.body;
+    const { name, phone, address, dept, id, details, team } = req.body;
     const user = await User.findById(id);
     console.log(id);
     if (!user) throw Error("No user found");
@@ -21,6 +21,7 @@ export const register_task = async (req, res) => {
       assigndate: today,
       completionDate: "",
     });
+
     const savedTask = await newTask.save();
     console.log(savedTask);
     res.status(201).json({ savedTask, ok: true });
@@ -30,6 +31,17 @@ export const register_task = async (req, res) => {
 };
 
 // Read
+
+export const getTaskById = async (req, res) => {
+  const { id } = req.id;
+  try {
+    const task = Task.find({ id: id });
+    res.send(200).json(task);
+  } catch (err) {
+    res.send(500).json(err);
+  }
+};
+
 export const getAllTaskByDepartment = async (req, res) => {
   console.log(req.body);
   const { id } = req.body;
@@ -107,12 +119,13 @@ export const updateTask = async (req, res, next) => {
 // Assign Worker
 export const assignWorker = async (req, res) => {
   try {
-    const { workerId, taskIdarray } = req.body;
+    const { workerIdArray, taskIdarray } = req.body;
     taskIdarray.forEach((element) => {
-      const update = Task.findByIdAndUpdate(element, {
-        workerId: workerId,
+      Task.findByIdAndUpdate(element, {
+        w_h_Id: workerIdArray,
       });
     });
+    res.send(200).json({ success: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
@@ -120,18 +133,6 @@ export const assignWorker = async (req, res) => {
 
 // Assign helper
 // let x = y
-export const assignHelper = async (req, res) => {
-  try {
-    const { HelperId, taskIdarray } = req.body;
-    taskIdarray.forEach((element) => {
-      const update = Task.findByIdAndUpdate(element, {
-        helperId: helperId,
-      });
-    });
-  } catch (err) {
-    res.status(404).json({ message: err.message });
-  }
-};
 
 // Filter
 export const filter = async (req, res, next) => {
@@ -160,5 +161,29 @@ export const filter_30 = async (req, res, next) => {
     res.send(200).json(filteredData);
   } catch (err) {
     res.status(404).json({ msg: "Can't find" });
+  }
+};
+
+export const removeWorker = async (req, res) => {
+  const { taskId, workerIdArray } = req.body;
+
+  try {
+    const arr = Task.findById(taskId);
+    Task.findByIdAndUpdate(taskId, {
+      w_h_Id: workerIdArray.filter((element) => {}),
+    });
+  } catch (err) {}
+};
+
+export const addWorker = async (req, res) => {
+  const { taskId, workerIdArray } = req.body;
+  let arr;
+  try {
+    arr = Task.findById(taskId);
+    Task.findByIdAndUpdate(taskId, {
+      w_h_Id: workerIdArray.filter((element) => {}),
+    });
+  } catch (err) {
+    res.status(404).json(err);
   }
 };
