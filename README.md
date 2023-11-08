@@ -31,7 +31,6 @@ User can register complaints with details including address, phone num, details,
 - [ ] Push notifications
 - [ ] Attendance System
 - [ ] Metric Analysis by Admin(Complaints completed till date, Attendance records etc.)
-- [ ] ### Backend features
 
 ## Technologies
 
