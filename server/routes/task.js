@@ -4,10 +4,12 @@ import {
   getAllTaskByUser,
   getAllTaskByWorker,
   updateTask,
+  assignWorker,
 } from "../controllers/Tasks.js";
 import express from "express";
 const router = express.Router();
 router.post("/register", register_task);
 router.post("/getalltaskbydepartment", getAllTaskByDepartment);
 router.post("/getalltaskbyuser", getAllTaskByUser);
+router.post("/assignworker", assignWorker);
 export default router;

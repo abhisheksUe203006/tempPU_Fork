@@ -16,17 +16,17 @@ import { roleContext } from "../../../screens/Assistant/AssistantScreen";
 import { userContext } from "../../../screens/User/UserScreen";
 import AssignButton from "./AssignButton";
 
-const Body = ({ complaintsList, setComplaintsList, screen, context }) => {
+const Body = ({
+  complaintsList,
+  setComplaintsList,
+  context,
+  tasks,
+  setRefresh,
+}) => {
   const [isClicked, setIsClicked] = useState(false);
   const [selectedRole, setSelectedRole] = useState(["Pending", 10]);
   const [empSelected, setEmpSelected] = useState(false);
-  const { dept, _id, name, role } = useContext(context);
-  const [tasks, setTasks] = useState({
-    completed: [],
-    pending: [],
-    ongoing: [],
-  });
-  const [refresh, setRefresh] = useState(false);
+
   // let name, role;
   // switch (screen) {
   //   case "assistant":
@@ -42,60 +42,19 @@ const Body = ({ complaintsList, setComplaintsList, screen, context }) => {
   //     }
   //     break;
   // }
+  const { _id, name, role, dept } = useContext(context);
   const showEmployee = ["assistant", "user"];
   const assign = showEmployee.includes(role.toLowerCase());
   const [filter, setFilter] = useState(false);
 
   useEffect(() => {
+    console.log(complaintsList);
+  }, [complaintsList]);
+  useEffect(() => {
     setEmpSelected(false);
   }, [isClicked]);
-  const uri = "http://192.168.29.131:4000/task/getalltaskbyuser";
   // const id = "64dc907f480fa2b4e93931bc"
-  useEffect(() => {
-    const handle = async () => {
-      console.log("here");
-      try {
-        const response = await fetch(uri, {
-          method: "POST",
-          body: JSON.stringify({ id: _id, dept }),
-          // body: {id: _id, dept},
-          headers: { "Content-Type": "application/json" },
-        });
-        // console.log(res);
-        const res = await response.json();
-        if (res.ok) {
-          console.log(res.data);
-          let completed = [],
-            pending = [],
-            ongoing = [];
-          res.data.forEach((item) => {
-            // const temp = { : item._id, description: item.details };
-            switch (item.status) {
-              case "Completed":
-                completed.push(item);
-                break;
-              case "Pending":
-                pending.push(item);
-                break;
-              case "Ongoing":
-                ongoing.push(item);
-                break;
-            }
-          });
-          // console.log(completed, pending, ongoing)
-          setTasks({ completed, pending, ongoing });
-          // console.log(tasks)
-        } else {
-          throw Error("failed");
-        }
-      } catch (err) {
-        alert(err);
-      }
-    };
-    handle();
-    console.log("out");
-  }, [refresh]);
-  console.log(tasks.pending);
+
   const data = [
     {
       name: "Completed",
@@ -204,7 +163,14 @@ const Body = ({ complaintsList, setComplaintsList, screen, context }) => {
 
       <AssignButton
         disable={false}
-        args={{ setRefresh, id: _id }}
+        args={{
+          setRefresh,
+          id: _id,
+          complaintsList,
+          setComplaintsList,
+          role: "employee",
+          dept,
+        }}
         context={context}
       />
     </View>

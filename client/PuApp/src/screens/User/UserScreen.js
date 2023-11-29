@@ -10,7 +10,7 @@ import DrawerComponent from "../../components/Role.js/Drawer/DrawerComponent";
 import Drawer from "../../components/Role.js/Drawer/Drawer";
 import User from "./User";
 import { useRoute } from "@react-navigation/native";
-import AddEmployee from "./AddEmployee";
+import AddEmployee from "../Assistant/AddEmployee";
 import { Feather } from "@expo/vector-icons";
 
 const Draw = createDrawerNavigator();
@@ -18,8 +18,9 @@ export const userContext = createContext();
 
 const UserScreen = () => {
   const route = useRoute();
+  console.log(route.params);
   const { role, name, dept, _id } = route.params;
-  console.log(dispVal);
+
   return (
     <userContext.Provider
       value={{

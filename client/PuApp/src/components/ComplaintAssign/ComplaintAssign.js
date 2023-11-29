@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  Button,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import colors from "../../../assets/css";
@@ -16,20 +17,78 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from "react-native-responsive-dimensions";
-import data from "./employeeData";
-import { useRoute } from "@react-navigation/native";
+// import data from "./employeeData";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { useEffect } from "react";
+
+const uri = "http://192.168.29.131:4000/task/assignworker";
+const assign = async (item, complaintsList) => {
+  try {
+    console.log(item);
+    const result = await fetch(uri, {
+      method: "POST",
+      body: JSON.stringify({
+        workerIdArray: [item._id],
+        taskIdarray: complaintsList,
+      }),
+      // body: {id: _id, dept},
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const res = await result.json();
+    if (res.success) {
+      alert("Successfully Assigned");
+    }
+  } catch (err) {
+    alert(err);
+  }
+};
 
 const ComplaintAssign = ({ navigation }) => {
   // const complaintsList = ["1", "2"];
   const route = useRoute();
-  const { complaintsList } = route.params;
+  const { complaintsList, id, role, dept } = route.params;
   const [back, setBack] = useState(false);
+  const [data, setData] = useState([]);
   const complaintText = () => {
     const temp = complaintsList.slice(0, 3);
     str = temp.join(", ");
     if (complaintsList.length > 3) str += "...";
     return str;
   };
+
+  const uri = "http://192.168.29.131:4000/employee/getallemployeebydepartment";
+  useEffect(() => {
+    const handle = async () => {
+      try {
+        console.log(role, dept);
+        const result = await fetch(uri, {
+          method: "POST",
+          body: JSON.stringify({ role, dept }),
+          // body: {id: _id, dept},
+          headers: { "Content-Type": "application/json" },
+        });
+        const res = await result.json();
+        if (res.success) {
+          const val = [];
+          res.data.forEach((item) => {
+            val.push({
+              ...item,
+              tasks: {
+                completed: 12,
+                pending: 5,
+                ongoing: 2,
+              },
+            });
+          });
+          setData(val);
+        }
+      } catch (err) {
+        alert(err);
+      }
+    };
+    handle();
+  }, []);
   // if (back) {
   //   navigation.navigate("Home");
   // }
@@ -38,8 +97,6 @@ const ComplaintAssign = ({ navigation }) => {
       <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
-            // console.log("hello");
-
             navigation.goBack();
             // return setBack(true);
           }}
@@ -60,7 +117,8 @@ const ComplaintAssign = ({ navigation }) => {
       <FlatList
         data={data}
         renderItem={({ item, index }) => {
-          return <Tab item={item} />;
+          console.log(item);
+          return <Tab item={item} complaintsList={complaintsList} />;
         }}
         style={styles.listStyle}
       ></FlatList>
@@ -69,8 +127,7 @@ const ComplaintAssign = ({ navigation }) => {
 };
 
 const Tab = (props) => {
-  const { item } = props;
-  // console.log(item);
+  const { item, complaintsList } = props;
 
   return (
     <View style={tabStyle.container}>
@@ -133,8 +190,15 @@ const Tab = (props) => {
           </View>
         </View>
         <View style={tabStyle.buttonContainer}>
-          <TouchableOpacity style={tabStyle.buttonStyle}>
-            <Text style={{ color: colors.color, fontWeight: 800 }}>Assign</Text>
+          <TouchableOpacity
+            style={tabStyle.buttonStyle}
+            onPress={() => {
+              assign(item, complaintsList);
+            }}
+          >
+            <Text name style={{ color: colors.color, fontWeight: 800 }}>
+              Assign
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

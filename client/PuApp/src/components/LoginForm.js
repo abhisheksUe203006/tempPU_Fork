@@ -41,7 +41,7 @@ const LoginForm = ({ navigation }) => {
       res = await res.json();
       if (!res.success) throw new Error("User Does not exist");
       // await AsyncStorage.setItem("jwtToken", res.token);
-      console.log(res);
+      console.log(res.user);
       navigation.dispatch({
         ...StackActions.replace("UserScreen", res.user),
         target: navigation.getState().key,

@@ -26,10 +26,10 @@ const NavigatorComponent = () => {
           name="AssistantScreen"
           component={AssistantScreen}
           initialParams={{
-            name: "Rohit Sharma",
-            dept: "Captain",
-            role: "Batsman",
-            _id: 123,
+            name: "Abhishek",
+            dept: "Water",
+            role: "Assitant",
+            _id: "652be591cd97a4ee18fd6999",
           }}
           options={{ headerShown: false }}
         />

@@ -33,7 +33,7 @@ const TabTasks = ({
         disabled={selectedRole[0] == "Pending" ? false : true}
         onPress={() => {
           if (complaintsList.indexOf(item.id) == -1) {
-            setComplaintsList([...complaintsList, item.id]);
+            setComplaintsList((list) => [...list, item.id]);
 
             // setSt({ backgroundColor: "rgba(242, 121, 107, 0.6)" });
             setSt({
@@ -42,11 +42,9 @@ const TabTasks = ({
               elevation: 0,
             });
           } else {
-            setComplaintsList(
-              complaintsList.filter((id) => {
-                return id != item.id;
-              })
-            );
+            setComplaintsList((list) => {
+              return list.filter((id) => id != item.id);
+            });
             setSt({});
           }
         }}

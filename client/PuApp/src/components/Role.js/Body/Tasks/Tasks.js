@@ -10,7 +10,6 @@ const Tasks = ({ selectedRole, complaintsList, setComplaintsList, tasks }) => {
   // const { selectedRole, setIsAssigning } =
   //   route.params?.userParam ?? "defaultValue";
   // const { selectedRole, complaintsList, setComplaintsList } = route.params;
-  console.log(tasks);
   return (
     <View style={bodyStyles.listStyle}>
       <FlatList

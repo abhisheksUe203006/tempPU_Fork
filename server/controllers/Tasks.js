@@ -119,13 +119,14 @@ export const updateTask = async (req, res, next) => {
 // Assign Worker
 export const assignWorker = async (req, res) => {
   try {
+    console.log(req.body);
     const { workerIdArray, taskIdarray } = req.body;
-    taskIdarray.forEach((element) => {
+    await taskIdarray.forEach((element) => {
       Task.findByIdAndUpdate(element, {
         w_h_Id: workerIdArray,
       });
     });
-    res.send(200).json({ success: true });
+    res.status(200).json({ success: true });
   } catch (err) {
     res.status(404).json({ message: err.message });
   }

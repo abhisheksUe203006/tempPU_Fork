@@ -19,13 +19,14 @@ import {
 import colors from "../../../assets/css";
 import DropDownSelector from "../User/DropDownSelector";
 import { Feather } from "@expo/vector-icons";
-import DropDownModal from "./DropDownModal";
-import { userContext } from "./UserScreen";
+import { roleContext } from "./AssistantScreen";
+import DropDownModal from "../User/DropDownModal";
+
 import { roles, departments } from "../../components/heirarchy";
 
 const AddEmployee = () => {
   const [formData, setFormData] = useState({
-    department: useContext(userContext).dept,
+    department: useContext(roleContext).dept,
   });
 
   const [isClickedRole, setIsClickedRole] = useState(false);

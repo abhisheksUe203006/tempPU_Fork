@@ -11,7 +11,7 @@ import DrawerComponent from "../../components/Role.js/Drawer/DrawerComponent";
 import { Feather } from "@expo/vector-icons";
 import Drawer from "../../components/Role.js/Drawer/Drawer";
 import Assistant from "./Assistant";
-import AddEmployee from "../User/AddEmployee";
+import AddEmployee from "./AddEmployee";
 import { useRoute } from "@react-navigation/native";
 
 const Draw = createDrawerNavigator();

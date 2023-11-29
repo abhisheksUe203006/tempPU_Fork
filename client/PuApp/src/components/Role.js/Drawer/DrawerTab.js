@@ -7,7 +7,7 @@ import {
   responsiveWidth,
 } from "react-native-responsive-dimensions";
 import { useNavigation } from "react-router-dom";
-import AddEmployee from "../../../screens/User/AddEmployee";
+import AddEmployee from "../../../screens/Assistant/AddEmployee";
 
 const DrawerTab = ({ title, iconName, component, navigation }) => {
   return (
