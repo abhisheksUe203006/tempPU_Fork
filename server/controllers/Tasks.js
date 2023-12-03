@@ -83,12 +83,15 @@ export const getAllTaskByUser = async (req, res) => {
 };
 
 export const getAllTaskByWorker = async (req, res) => {
-  const id = req.params.id;
+  const id = req.body.id;
+  console.log(id);
   let data;
   try {
-    data = Task.find({ WorkerId: id });
-    res.send(200).json(data);
+    const query = { w_h_IDs: { $in: [id] } };
+    data = await Task.find(query);
+    res.status(200).json({ success: true, data });
   } catch (err) {
+    console.log(err);
     res.status(404).json({ msg: "Can't find" });
   }
 };
@@ -121,13 +124,18 @@ export const assignWorker = async (req, res) => {
   try {
     console.log(req.body);
     const { workerIdArray, taskIdarray } = req.body;
-    await taskIdarray.forEach((element) => {
-      Task.findByIdAndUpdate(element, {
-        w_h_Id: workerIdArray,
+
+    for (const element of taskIdarray) {
+      await Task.findByIdAndUpdate(element, {
+        $push: { w_h_IDs: { $each: workerIdArray } },
+
+        $set: { status: "Ongoing" },
       });
-    });
+    }
+
     res.status(200).json({ success: true });
   } catch (err) {
+    console.log(err);
     res.status(404).json({ message: err.message });
   }
 };

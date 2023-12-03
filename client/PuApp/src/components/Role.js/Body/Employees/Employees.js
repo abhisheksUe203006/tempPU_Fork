@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import TabEmployees from "./TabEmployees";
 import {
@@ -7,27 +7,27 @@ import {
 } from "react-native-responsive-dimensions";
 import { roleContext } from "../../../../screens/Assistant/AssistantScreen";
 
-const uri = "http://192.168.29.131:4000/task/getAllEmployee";
+const uri = "http://192.168.29.131:4000/employee/getallemployeebydepartment";
 
 const Employees = () => {
-  const { role } = useContext(roleContext);
-  let employees;
+  const { dept } = useContext(roleContext);
+  const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
-    console.log(role);
+    // console.log(role);
     const fetchData = async () => {
       try {
         console.log("h");
         const response = await fetch(uri, {
           method: "POST",
-          body: JSON.stringify({ role }),
-          header: { "Content-Type": "application/json" },
+          body: JSON.stringify({ role: "employee", dept }),
+          // body: {id: _id, dept},
+          headers: { "Content-Type": "application/json" },
         });
         console.log("hi");
         const res = await response.json();
         if (res.success) {
-          console.log(res.data);
-          employees = res.data;
+          setEmployees(res.data);
         }
       } catch (err) {
         alert(err.message);

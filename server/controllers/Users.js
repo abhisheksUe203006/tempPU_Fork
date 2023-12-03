@@ -31,10 +31,11 @@ export const register_employee = async (req, res) => {
 export const getAllEmployee = async (req, res) => {
   try {
     console.log(req.body);
-    const { role, type } = req.params;
+    const { role, type } = req.body;
     const data = await User.find({ role: role });
     res.status(200).json({ success: true, data });
   } catch (err) {
+    console.log(err);
     res.status(404).json({ message: err.message });
   }
 };
@@ -42,7 +43,7 @@ export const getAllEmployee = async (req, res) => {
 export const getAllEmployeeByDepartment = async (req, res) => {
   const { role, dept } = req.body;
   try {
-    console.log(req.body.role);
+    console.log(req.body);
     // console.log(role, dept, hello);
     const data = await User.find({ role: role, department: dept });
 

@@ -13,6 +13,7 @@ import Header from "./src/components/ComplaintPage/Header";
 import ComplaintPage from "./src/components/ComplaintPage/ComplaintPage";
 import User from "./src/screens/User/User";
 import UserScreen from "./src/screens/User/UserScreen";
+import EmployeeScreen from "./src/screens/Employee/EmployeeScreen";
 import ComplaintAssign from "./src/components/ComplaintAssign/ComplaintAssign";
 import EditProfile from "./src/components/Role.js/EditProfile";
 
@@ -22,7 +23,7 @@ const NavigatorComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="AssistantScreen"
           component={AssistantScreen}
           initialParams={{
@@ -32,7 +33,7 @@ const NavigatorComponent = () => {
             _id: "652be591cd97a4ee18fd6999",
           }}
           options={{ headerShown: false }}
-        />
+        /> */}
 
         <Stack.Screen
           name="HomePage"
@@ -54,6 +55,12 @@ const NavigatorComponent = () => {
           component={UserScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen
+          name="EmployeeScreen"
+          component={EmployeeScreen}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="ComplaintAssign"
           component={ComplaintAssign}

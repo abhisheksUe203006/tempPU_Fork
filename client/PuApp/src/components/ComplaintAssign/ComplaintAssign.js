@@ -47,7 +47,7 @@ const assign = async (item, complaintsList) => {
 const ComplaintAssign = ({ navigation }) => {
   // const complaintsList = ["1", "2"];
   const route = useRoute();
-  const { complaintsList, id, role, dept } = route.params;
+  const { complaintsList, id, role, dept, setRefresh } = route.params;
   const [back, setBack] = useState(false);
   const [data, setData] = useState([]);
   const complaintText = () => {
@@ -118,7 +118,13 @@ const ComplaintAssign = ({ navigation }) => {
         data={data}
         renderItem={({ item, index }) => {
           console.log(item);
-          return <Tab item={item} complaintsList={complaintsList} />;
+          return (
+            <Tab
+              item={item}
+              complaintsList={complaintsList}
+              setRefresh={setRefresh}
+            />
+          );
         }}
         style={styles.listStyle}
       ></FlatList>
@@ -127,7 +133,7 @@ const ComplaintAssign = ({ navigation }) => {
 };
 
 const Tab = (props) => {
-  const { item, complaintsList } = props;
+  const { item, complaintsList, setRefresh } = props;
 
   return (
     <View style={tabStyle.container}>
@@ -194,6 +200,7 @@ const Tab = (props) => {
             style={tabStyle.buttonStyle}
             onPress={() => {
               assign(item, complaintsList);
+              setRefresh((val) => !val);
             }}
           >
             <Text name style={{ color: colors.color, fontWeight: 800 }}>

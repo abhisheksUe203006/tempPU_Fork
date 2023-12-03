@@ -35,7 +35,7 @@ const bodyStyles = StyleSheet.create({
     borderRadius: responsiveWidth(2),
     borderWidth: responsiveWidth(0.5),
     borderColor: "rgba(0,0,0,0)",
-    elevation: responsiveWidth(0.5),
+    elevation: responsiveWidth(1),
     paddingTop: responsiveHeight(1),
     paddingBottom: responsiveHeight(1),
     marginTop: responsiveHeight(0.4),

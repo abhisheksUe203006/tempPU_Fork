@@ -7,6 +7,7 @@ import {
   responsiveWidth,
 } from "react-native-responsive-dimensions";
 import colors from "../../../../../assets/css";
+import { createErrorHandler } from "expo/build/errors/ExpoErrorManager";
 
 const TabTasks = ({
   item,
@@ -32,9 +33,9 @@ const TabTasks = ({
         style={bodyStyles.itemSelectButton}
         disabled={selectedRole[0] == "Pending" ? false : true}
         onPress={() => {
-          if (complaintsList.indexOf(item.id) == -1) {
-            setComplaintsList((list) => [...list, item.id]);
-
+          if (complaintsList.indexOf(item._id) == -1) {
+            setComplaintsList((list) => [...list, item._id]);
+            console.log(item._id);
             // setSt({ backgroundColor: "rgba(242, 121, 107, 0.6)" });
             setSt({
               borderColor: colors.color,
@@ -42,8 +43,9 @@ const TabTasks = ({
               elevation: 0,
             });
           } else {
+            console.log("ji");
             setComplaintsList((list) => {
-              return list.filter((id) => id != item.id);
+              return list.filter((id) => id != item._id);
             });
             setSt({});
           }

@@ -42,8 +42,14 @@ const LoginForm = ({ navigation }) => {
       if (!res.success) throw new Error("User Does not exist");
       // await AsyncStorage.setItem("jwtToken", res.token);
       console.log(res.user);
+      // console.log()
       navigation.dispatch({
-        ...StackActions.replace("UserScreen", res.user),
+        ...StackActions.replace(
+          res.user.role.slice(0, 1).toUpperCase() +
+            res.user.role.slice(1) +
+            "Screen",
+          res.user
+        ),
         target: navigation.getState().key,
       });
     } catch (err) {
